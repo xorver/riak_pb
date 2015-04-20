@@ -2,7 +2,7 @@
 %%
 %% riak_pb_kv_codec: protocol buffer utility functions for Riak KV messages
 %%
-%% Copyright (c) 2012 Basho Technologies, Inc.  All Rights Reserved.
+%% Copyright (c) 2012-2015 Basho Technologies, Inc.  All Rights Reserved.
 %%
 %% This file is provided to you under the Apache License,
 %% Version 2.0 (the "License"); you may not use this file
@@ -51,16 +51,13 @@
         ]).
 
 -export_type([quorum/0]).
+
+-include_lib("otp_compat/include/otp_compat.hrl").
+
 -type quorum() :: symbolic_quorum() | non_neg_integer().
 -type symbolic_quorum() :: one | quorum | all | default.
 -type value() :: binary().
-
--ifdef(namespaced_types).
--type metadata() :: dict:dict(binary(), binary()).
--else.
--type metadata() :: dict().
--endif.
-
+-type metadata() :: dict_t(binary(), binary()).
 -type contents() :: [{metadata(), value()}].
 
 %% @doc Annotated preflist type
